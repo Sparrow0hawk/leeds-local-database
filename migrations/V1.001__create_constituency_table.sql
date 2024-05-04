@@ -1,0 +1,5 @@
+CREATE TABLE electoral_unit.constituency
+(
+    id     INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY
+    ,name  TEXT NOT NULL UNIQUE
+);

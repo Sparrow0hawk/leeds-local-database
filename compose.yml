@@ -1,0 +1,27 @@
+services:
+
+  flyway:
+    image: flyway/flyway:10.12
+    command: migrate
+    environment:
+      FLYWAY_URL: "jdbc:postgresql://database:5432/local-elections"
+      FLYWAY_USER: elections
+      FLYWAY_PASSWORD: password
+      FLYWAY_SCHEMAS: "flyway,electoral_unit,election"
+    volumes:
+      - ${PWD}/migrations:/flyway/sql
+    depends_on:
+      database:
+        condition: service_healthy
+
+  database:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: elections
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: local-elections
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB
+      interval: 5s
