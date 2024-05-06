@@ -1,0 +1,44 @@
+[project]
+name = "insert_results"
+version = "1.0.0"
+description = "Package for inserting election results from Data Mill North"
+requires-python = ">=3.12"
+dependencies = [
+    "pg8000~=1.31.0",
+    "sqlalchemy~=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black~=24.3.0",
+    "isort~=5.13.0",
+    "mypy~=1.9.0",
+    "pytest~=8.1.0",
+    "ruff~=0.3.0",
+    "testcontainers~=4.3.0",
+]
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"
+
+# black
+
+[tool.black]
+line-length = 120
+
+# isort
+
+[tool.isort]
+profile = "black"
+
+# mypy
+
+[tool.mypy]
+strict = true
+
+[[tool.mypy.overrides]]
+module = [
+    "testcontainers.postgres.*",
+]
+ignore_missing_imports = true
