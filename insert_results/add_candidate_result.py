@@ -2,7 +2,16 @@ from sqlalchemy import Engine, text
 
 
 def add_candidate_result(
-    engine: Engine, candidate: str, party: str, votes: int, electorate: int, spoilt: int, ward: str, election_date: int
+    engine: Engine,
+    forename: str,
+    surname: str,
+    party: str,
+    votes: int,
+    electorate: int,
+    spoilt: int,
+    elected: bool,
+    ward: str,
+    election_date: int,
 ) -> None:
     with engine.begin() as connection:
         connection.execute(
@@ -10,20 +19,24 @@ def add_candidate_result(
                 """
             INSERT INTO election.results
             (
-                candidate_name, 
+                candidate_forename,
+                candidate_surname,
                 party_id, 
                 votes, 
                 electorate, 
-                spoilt_ballots, 
+                spoilt_ballots,
+                elected,
                 ward_id, 
                 election_date
             )
             SELECT 
-                :candidate_name,
+                :candidate_forename,
+                :candidate_surname,
                 party.id,
                 :votes,
                 :electorate,
                 :spoilt_ballots,
+                :elected,
                 ward.id,
                 :election_date
             FROM (SELECT 1) AS dummy
@@ -34,11 +47,13 @@ def add_candidate_result(
             """
             ),
             {
-                "candidate_name": candidate,
+                "candidate_forename": forename,
+                "candidate_surname": surname,
                 "party_name": party,
                 "votes": votes,
                 "electorate": electorate,
                 "spoilt_ballots": spoilt,
+                "elected": elected,
                 "ward_name": ward,
                 "election_date": election_date,
             },
