@@ -17,14 +17,14 @@ def main(file_path: str, election_year: str) -> None:
 
     for row in data:
         add_candidate_result(engine=engine,
-                             forename=row["Forename"],
-                             surname=row["Surname"],
-                             party=row["Partyname"],
+                             forename=row["CandidateForename"],
+                             surname=row["CandidateSurname"],
+                             party=row["CandidateDescription"],
                              votes=row["Votes"],
                              electorate=row["Electorate"] if row.get("Electorate") else None,
-                             spoilt=row["SpoiltPapers"] if row.get("SpoiltPapers") else None,
-                             elected=True if row["Elected"] == "TRUE" else False,
-                             ward=row["Wardname"].replace("and", "&"),
+                             spoilt=row["Spoilt ballots"] if row.get("Spoilt ballots") else None,
+                             elected=bool(int(row["Elected"])),
+                             ward=row["AreaName"],
                              election_date=election_year)
 
 

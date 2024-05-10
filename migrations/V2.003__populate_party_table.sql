@@ -1,6 +1,7 @@
 INSERT INTO election.party(name)
 VALUES
     ('Alliance for Green Socialism'),
+    ('Alliance for Green Socialism - Save NHS'),
     ('Conservative Party'),
     ('Conservative Party Candidate'),
     ('Local Conservatives'),
@@ -9,8 +10,10 @@ VALUES
     ('East Leeds Independents Party'),
     ('English Democrats'),
     ('The For Britain Movement'),
+    ('Freedom Alliance. No Lockdowns. No Curfews.'),
     ('Freedom Alliance. Truth, Equality and Health.'),
     ('Garforth and Swillington Independents Party'),
+    ('Garforth & Swillington Independents Party'),
     ('Green Party'),
     ('Green Party lead candidate'),
     ('Green Party second choice candidate'),
