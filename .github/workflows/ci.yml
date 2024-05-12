@@ -1,0 +1,14 @@
+name: CI
+
+on:
+    push:
+        branches: [ "main" ]
+
+jobs:
+    ci:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Check migrations
+              run: docker compose up
