@@ -16,17 +16,16 @@ def main(file_path: str, election_year: str) -> None:
         data = list(csv.DictReader(open_file, dialect='unix'))
 
     for row in data:
-        if row["AreaTypeDescription"] == "Ward":
-            add_candidate_result(engine=engine,
-                                 forename=row["CandidateForename"],
-                                 surname=row["CandidateSurname"],
-                                 party=row["CandidateDescription"],
-                                 votes=row["CandidateVotes"],
-                                 electorate=row["Electorate"] if row.get("Electorate") else None,
-                                 spoilt=row["Spoilt ballots"] if row.get("Spoilt ballots") else None,
-                                 elected=True if row["Elected"] else False,
-                                 ward=row["AreaNameOriginal"],
-                                 election_date=election_year)
+        add_candidate_result(engine=engine,
+                             forename=row["CandidateForename"],
+                             surname=row["CandidateSurname"],
+                             party=row["CandidateDescription"],
+                             votes=row["CandidateVotes"],
+                             electorate=row["Electorate"] if row.get("Electorate") else None,
+                             spoilt=row["Spoilt ballots"] if row.get("Spoilt ballots") else None,
+                             elected=True if row["Elected"] == "True" else False,
+                             ward=row["AreaName"],
+                             election_date=election_year)
 
 
 if __name__ == "__main__":
