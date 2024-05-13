@@ -1,0 +1,5 @@
+CREATE TABLE election.parent_party
+(
+    id     INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY
+    ,name  TEXT NOT NULL UNIQUE
+);
